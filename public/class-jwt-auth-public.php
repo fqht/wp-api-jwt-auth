@@ -152,7 +152,9 @@ class Jwt_Auth_Public {
 			);
 
 			$users = get_users($args);
-			$username = $users[0]->data->user_nicename;
+			if ( $users[0] ) {
+				$username = $users[0]->data->user_nicename;
+			}
 		}
 		
 		/** Try to authenticate the user with the passed credentials*/
