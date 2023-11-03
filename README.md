@@ -1,5 +1,7 @@
 # JWT Authentication for the WP REST API
 
+> 我们修改源码，以支持手机号密码登录。
+
 A simple plugin to add [JSON Web Token (JWT)](https://tools.ietf.org/html/rfc7519) Authentication to the WP REST API.
 
 To know more about JSON Web Tokens, please visit [http://jwt.io](http://jwt.io).

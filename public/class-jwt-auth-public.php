@@ -114,6 +114,13 @@ class Jwt_Auth_Public {
 	}
 
 	/**
+	 * 支持手机号登录
+	 */
+	public function isPhone($value) {
+		return filter_var($value, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^1[3,4,5,6,7,8,9]\d{9}$/")));
+	}
+
+	/**
 	 * Get the user and password in the request body and generate a JWT
 	 *
 	 * @param WP_REST_Request $request
@@ -135,6 +142,19 @@ class Jwt_Auth_Public {
 				]
 			);
 		}
+
+		// 补充支持手机号登录
+		if ($this->isPhone($username)) {
+			$args = array(
+				'meta_key' => 'phone',
+				'meta_value' => $username,
+				'meta_compare' => '=',
+			);
+
+			$users = get_users($args);
+			$username = $users[0]->data->user_nicename;
+		}
+		
 		/** Try to authenticate the user with the passed credentials*/
 		$user = wp_authenticate( $username, $password );
 
