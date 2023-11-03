@@ -152,7 +152,7 @@ class Jwt_Auth_Public {
 			);
 
 			$users = get_users($args);
-			if ( $users[0] ) {
+			if ( $users && $users[0] ) {
 				$username = $users[0]->data->user_nicename;
 			}
 		}
